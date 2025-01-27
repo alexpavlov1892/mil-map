@@ -2,6 +2,7 @@ import React from 'react';
 import { MapContainer, TileLayer} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import './App.css';
 
 // Custom Leaflet marker icons
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
@@ -19,18 +20,15 @@ L.Marker.prototype.options.icon = defaultIcon;
 
 function App() {
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
       <MapContainer
   center={[47.67572320170246, 15.492752747581674]}
   zoom={5}
-  style={{ height: '100vh', width: '100%' }}
 >
   <TileLayer
     attribution='&copy; OpenStreetMap contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
 </MapContainer>
-    </div>
   );
 }
 
