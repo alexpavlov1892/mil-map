@@ -1,33 +1,42 @@
-import React from 'react';
-import { MapContainer, TileLayer} from 'react-leaflet';
+import React, {useEffect, useState} from 'react';
+import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+import { Icon } from 'leaflet';
 import './App.css';
+import axios from 'axios';
 
-// Custom Leaflet marker icons
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-
-const defaultIcon = L.icon({
-  iconUrl: markerIcon,
-  shadowUrl: markerShadow,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-L.Marker.prototype.options.icon = defaultIcon;
-
+const customIcon = new Icon({
+  iconUrl: '/location.png',
+  iconSize: [38, 38],
+  iconAnchor: [19, 38],
+})
 function App() {
+  const [locations, setLocations] = useState([]);
+
+  // Fetch locations from backend
+  useEffect(() => {
+    axios.get('http://localhost:5001/api')
+      .then(response => {
+        setLocations(response.data);
+      })
+      .catch(error => console.error("Error fetching locations:", error));
+  }, []);
   return (
       <MapContainer
   center={[47.67572320170246, 15.492752747581674]}
   zoom={5}
+  minZoom={2}
 >
   <TileLayer
     attribution='&copy; OpenStreetMap contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
+
+  {locations.map(loc => (
+    <Marker key={loc.id} position={[loc.latitude, loc.longitude]} icon={customIcon}>
+      <Popup>{loc.name}</Popup>
+    </Marker> 
+  ))}
 </MapContainer>
   );
 }
