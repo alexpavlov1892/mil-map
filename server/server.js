@@ -4,9 +4,9 @@ const { Pool } = require('pg');
 const cors = require('cors');
 
 const app = express();
-const port = 5001;  // Your existing port
+const port = 5001;
 
-// Enable CORS to allow frontend to access the API
+
 app.use(cors());
 
 // PostgreSQL connection setup
@@ -17,12 +17,7 @@ const pool = new Pool({
     database: process.env.PG_DATABASE
 });
 
-// Test API endpoint (unchanged)
-// app.get('/api', (req, res) => {
-//     res.json({ "users": ["user1", "user2", "user4"] });
-// });
-
-// **New Route: Fetch Locations from Database**
+//Fetch Locations from Database
 app.get('/api', async (req, res) => {
     try {
         const result = await pool.query(

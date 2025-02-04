@@ -9,6 +9,7 @@ const customIcon = new Icon({
   iconUrl: '/location.png',
   iconSize: [38, 38],
   iconAnchor: [19, 38],
+  // popupAnchor: [0, -38]
 })
 function App() {
   const [locations, setLocations] = useState([]);
@@ -25,7 +26,8 @@ function App() {
       <MapContainer
   center={[47.67572320170246, 15.492752747581674]}
   zoom={5}
-  minZoom={2}
+  minZoom={3}
+  maxZoom={15}
 >
   <TileLayer
     attribution='&copy; OpenStreetMap contributors'
