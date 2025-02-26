@@ -9,7 +9,7 @@ const port = 5001;
 
 app.use(cors());
 
-// PostgreSQL connection setup
+
 const pool = new Pool({
     host: process.env.PG_HOST,
     user: process.env.PG_USER,
@@ -17,11 +17,10 @@ const pool = new Pool({
     database: process.env.PG_DATABASE
 });
 
-//Fetch Locations from Database
 app.get('/api', async (req, res) => {
     try {
         const result = await pool.query(
-            `SELECT id, name, ST_X(location::geometry) AS longitude, ST_Y(location::geometry) AS latitude FROM marker`
+            `SELECT id, name, organiser, funding, duration, status, info, ST_X(location::geometry) AS longitude, ST_Y(location::geometry) AS latitude FROM marker`
         );
         res.json(result.rows);
     } catch (err) {
@@ -30,7 +29,7 @@ app.get('/api', async (req, res) => {
     }
 });
 
-// Start the server
+// start server
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });

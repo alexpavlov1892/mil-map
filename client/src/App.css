@@ -1,7 +1,122 @@
 @import "leaflet/dist/leaflet.css";
 
-/* Map size */
-
 .leaflet-container {
     height: 100vh;
 }
+
+.popup-content {
+    text-align: left;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .popup-content h3 {
+    text-align: center;
+    margin: 4px 0;
+    font-size: 18px;
+    color: #424242;
+  }
+
+  .popup-content h2 {
+    text-align: center;
+    margin: 4px 0;
+    font-size: 18px;
+    color: #424242;
+
+
+  }
+
+  
+  .popup-content img {
+    display: block;
+    width: 2rem;
+    height: auto;
+    border-radius: 8px;
+    margin: 5px auto;
+    
+  }
+  
+  .popup-content p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #424242;
+  }
+
+  .popup-content a {
+    color: #4eb0b3;
+    text-decoration: none;
+    
+  }
+  
+  .popup-content strong {
+    color: #1c1c1c;
+  }
+  
+  .nav {
+    position: fixed;
+    top: 0;
+    left: -300px; 
+    width: 250px;
+    height: 100%;
+    background: #333;
+    color: white;
+    transition: left 0.3s ease;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .nav.open {
+    left: 0;
+  }
+  
+  .menu-btn {
+    position: absolute;
+    top: 20px;
+    right: -50px;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .nav-content {
+    margin-top: 20px;
+  }
+  
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .search-icon {
+    color: gray;
+    margin-right: 5px;
+  }
+  
+  .search-box input {
+    border: none;
+    outline: none;
+    flex: 1;
+  }
+
+  .status.ongoing {
+    color: green;
+}
+
+.status.finished {
+    color: red;
+}
+
+.status.upcoming {
+    color: orange;
+}
+
+.status.default {
+    color: black;
+}
+
+
