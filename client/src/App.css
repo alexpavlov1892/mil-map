@@ -1,61 +1,150 @@
 @import "leaflet/dist/leaflet.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
 
+
+/* Leaflet Map Container */
 .leaflet-container {
     height: 100vh;
 }
 
-.popup-content {
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1f392c;
+    height: 100vh;
+}
+
+.map {
+    flex: 1;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+/* Popup Container */
+.popUpContainer {
+    position: relative;
+    padding: 20px;
+    font-family: "Arial", sans-serif; /* Change this to Open Sans */
+    background-color: white;
+    border-radius: 20px;
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+    font-size: 16px;
+    /* width: 400px; */
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.infoLabel {
+    font-weight: bold; /* Open Sans future font */
+    color: #0097a7;
     text-align: left;
+    flex: 1;
+}
+
+.infoValue {
+    color: #333;
+    text-align: left;
+    flex: 1;
+}
+
+.popup-divider {
+    border-bottom: 1px solid #e0e0e0;
+    margin: 10px 0;
+}
+
+.moreInfoButton, .closeButton {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.moreInfoButton {
+    background-color: #0097a7;
+    color: white;
+}
+
+.moreInfoButton:hover {
+    background-color: #007a89;
+}
+
+.closeButton {
+    background-color: #d9534f;
+    color: white;
+    margin-top: 10px;
+}
+
+.closeButton:hover {
+    background-color: #c9302c;
+}
+
+.popup-content {
     padding: 10px;
+    text-align: left;
     font-family: Arial, sans-serif;
-  }
-  
-  .popup-content h3 {
+}
+
+.popup-content h3 {
+    font-family: 'Roboto', serif;  
+    /* font-weight: 900;                    Extra bold */
+    font-size: 28px;                    
+    color: #1d3228;                      
+    text-align: center;                  
+    margin: 0;                           
+    padding-bottom: 15px;                
+
+}
+
+.popup-content h2 {
     text-align: center;
     margin: 4px 0;
     font-size: 18px;
-    color: #424242;
-  }
+}
 
-  .popup-content h2 {
-    text-align: center;
-    margin: 4px 0;
-    font-size: 18px;
-    color: #424242;
-
-
-  }
-
-  
-  .popup-content img {
+.popup-content img {
     display: block;
     width: 2rem;
     height: auto;
     border-radius: 8px;
     margin: 5px auto;
-    
-  }
-  
-  .popup-content p {
+}
+
+.popup-content p {
     margin: 5px 0;
     font-size: 14px;
     color: #424242;
-  }
+}
 
-  .popup-content a {
-    color: #4eb0b3;
-    text-decoration: none;
-    
-  }
-  
-  .popup-content strong {
-    color: #1c1c1c;
-  }
-  
-  .nav {
+.nav {
     position: fixed;
     top: 0;
-    left: -300px; 
+    left: -300px;
     width: 250px;
     height: 100%;
     background: #333;
@@ -63,47 +152,110 @@
     transition: left 0.3s ease;
     padding: 20px;
     z-index: 1000;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .nav.open {
+    border-top-right-radius: 0px; 
+    border-bottom-right-radius: 0px;
+}
+
+.nav.open {
     left: 0;
-  }
-  
-  .menu-btn {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px; 
+}
+
+.menu-btn {
     position: absolute;
-    top: 20px;
+    top: 15px;
     right: -50px;
     background: none;
     border: none;
-    color: #333;
     cursor: pointer;
-  }
-  
-  .nav-content {
+    color: #333;
+    transition: color 1s ease;
+}
+
+.nav.open .menu-btn {
+    color: white;
+    top: 15px;
+    right: 10px;
+}
+
+
+
+.nav-content {
     margin-top: 20px;
-  }
-  
-  .search-box {
+}
+
+.search-box {
     display: flex;
     align-items: center;
     background: white;
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .search-icon {
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.search-icon {
     color: gray;
     margin-right: 5px;
-  }
-  
-  .search-box input {
+}
+
+.search-box input {
     border: none;
     outline: none;
     flex: 1;
-  }
+}
 
-  .status.ongoing {
+/* check box stuff  */
+
+.filter-options {
+    margin-top: 15px;
+}
+
+.filter-options h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.filter-options label {
+    display: block;
+    font-size: 14px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.filter-options input {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+
+
+.statusText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+
+.statusText .status {
+    display: inline-block;
+    text-align: center;
+    font-size: 20px;
+}
+
+.campaignTitle {
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0;
+    font-family:'Roboto', bold, serif;
+}
+
+
+.status.ongoing {
     color: green;
 }
 
@@ -118,5 +270,3 @@
 .status.default {
     color: black;
 }
-
-
