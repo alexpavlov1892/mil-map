@@ -1,272 +1,459 @@
 @import "leaflet/dist/leaflet.css";
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap");
 
-
-/* Leaflet Map Container */
 .leaflet-container {
-    height: 100vh;
+  height: 100vh;
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #1f392c;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1f392c;
+  height: 100vh;
 }
 
 .map {
-    flex: 1;
-    width: 100%;
-    border-radius: 20px;
-    overflow: hidden;
+  flex: 1;
+  width: 100%;
+  /* border-radius: 20px; */
+  overflow: hidden;
 }
 
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 
-/* Popup Container */
 .popUpContainer {
-    position: relative;
-    padding: 20px;
-    font-family: "Arial", sans-serif; /* Change this to Open Sans */
-    background-color: white;
-    border-radius: 20px;
-    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
-    font-size: 16px;
-    /* width: 400px; */
+  position: relative;
+  padding: 16px;
+  font-family: "Arial", sans-serif;
+  background-color: white;
+  border-radius: 16px;
+  font-size: 16px;
+  /* width: 400px; */
 }
 
 .infoRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    font-size: 16px;
-    line-height: 1.5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .infoLabel {
-    font-weight: bold; /* Open Sans future font */
-    color: #0097a7;
-    text-align: left;
-    flex: 1;
+  font-weight: bold;
+  color: #0097a7;
+  text-align: left;
+  flex: 1;
 }
 
 .infoValue {
-    color: #333;
-    text-align: left;
-    flex: 1;
+  color: #333;
+  text-align: left;
+  flex: 1;
 }
 
 .popup-divider {
-    border-bottom: 1px solid #e0e0e0;
-    margin: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+  margin: 6px 0;
 }
 
-.moreInfoButton, .closeButton {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 25px;
-    border: none;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: background-color 0.3s ease;
+.moreInfoButton,
+.closeButton {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
 }
 
 .moreInfoButton {
-    background-color: #0097a7;
-    color: white;
+  background-color: #0097a7;
+  color: white;
 }
 
 .moreInfoButton:hover {
-    background-color: #007a89;
+  background-color: #007a89;
 }
 
 .closeButton {
-    background-color: #d9534f;
-    color: white;
-    margin-top: 10px;
+  background-color: #d9534f;
+  color: white;
+  margin-top: 10px;
 }
 
 .closeButton:hover {
-    background-color: #c9302c;
+  background-color: #c9302c;
 }
 
 .popup-content {
-    padding: 10px;
-    text-align: left;
-    font-family: Arial, sans-serif;
+  padding: 10px;
+  text-align: left;
+  font-family: Arial, sans-serif;
 }
 
 .popup-content h3 {
-    font-family: 'Roboto', serif;  
-    /* font-weight: 900;                    Extra bold */
-    font-size: 28px;                    
-    color: #1d3228;                      
-    text-align: center;                  
-    margin: 0;                           
-    padding-bottom: 15px;                
-
+  font-family: "Roboto", serif;
+  font-weight: 900;
+  font-size: 28px;
+  color: #1d3228;
+  text-align: center;
+  margin: 0;
+  padding-bottom: 15px;
 }
 
 .popup-content h2 {
-    text-align: center;
-    margin: 4px 0;
-    font-size: 18px;
+  text-align: center;
+  margin: 4px 0;
+  font-size: 18px;
 }
 
 .popup-content img {
-    display: block;
-    width: 2rem;
-    height: auto;
-    border-radius: 8px;
-    margin: 5px auto;
+  display: block;
+  width: 2rem;
+  height: auto;
+  border-radius: 8px;
+  margin: 5px auto;
 }
 
 .popup-content p {
-    margin: 5px 0;
-    font-size: 14px;
-    color: #424242;
+  margin: 5px 0;
+  font-size: 14px;
+  color: #424242;
 }
 
 .nav {
-    position: fixed;
-    top: 0;
-    left: -300px;
-    width: 250px;
-    height: 100%;
-    background: #333;
-    color: white;
-    transition: left 0.3s ease;
-    padding: 20px;
-    z-index: 1000;
-    border-top-right-radius: 0px; 
-    border-bottom-right-radius: 0px;
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 250px;
+  height: 100vh;
+  max-height: 100vh;
+  background: #333;
+  color: white;
+  transition: left 0.3s ease;
+  padding: 20px;
+  z-index: 1000;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .nav.open {
-    left: 0;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px; 
+  left: 0;
+  border-top-right-radius: 20px;
+  /* border-top-left-radius: 20px; */
+  border-bottom-right-radius: 20px;
+}
+
+.nav-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin-bottom: 15px;
+  font-family: "Roboto Serif", serif;
 }
 
 .menu-btn {
-    position: absolute;
-    top: 15px;
-    right: -50px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #333;
-    transition: color 1s ease;
+  position: absolute;
+  top: 15px;
+  right: -50px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  transition: color 1s ease;
 }
 
 .nav.open .menu-btn {
-    color: white;
-    top: 15px;
-    right: 10px;
+  color: white;
+  top: 15px;
+  right: 10px;
 }
 
-
-
 .nav-content {
-    margin-top: 20px;
+  margin-top: 20px;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nav-content h2 {
+  font-family: "Roboto Serif", serif;
+  font-size: 22px;
 }
 
 .search-box {
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 8px;
-    border-radius: 8px;
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 .search-icon {
-    color: gray;
-    margin-right: 5px;
+  color: gray;
+  margin-right: 5px;
 }
 
 .search-box input {
-    border: none;
-    outline: none;
-    flex: 1;
+  border: none;
+  outline: none;
+  flex: 1;
 }
 
 /* check box stuff  */
 
-.filter-options {
-    margin-top: 15px;
+.target-audience-filters input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid white;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
 }
 
-.filter-options h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.filter-options label {
-    display: block;
-    font-size: 14px;
-    margin: 5px 0;
-    cursor: pointer;
+.target-audience-filters input[type="checkbox"]:checked {
+  background-color: white;
 }
 
 .filter-options input {
-    margin-right: 8px;
-    cursor: pointer;
+  margin-right: 8px;
+  cursor: pointer;
 }
 
-
-
-.statusText {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 20px;
+.target-audience-filters {
+  margin-top: 15px;
 }
 
-
-.statusText .status {
-    display: inline-block;
-    text-align: center;
-    font-size: 20px;
+.target-audience-filters h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-family: "Roboto Serif", serif;
 }
 
-.campaignTitle {
-    font-size: 35px;
-    font-weight: bold;
-    text-align: center;
-    margin: 10px 0;
-    font-family:'Roboto', bold, serif;
+.target-audience-filters label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
 }
 
+.target-audience-filters input {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+/* status stuff from here  */
+
+.status-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.status-checkboxes label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 15px;
+  border: 2px solid #ccc;
+  transition: all 0.3s ease-in-out;
+  white-space: nowrap;
+  gap: 6px;
+}
+
+.status-checkboxes h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-family: "Roboto Serif", serif;
+}
+
+.status-checkboxes label:hover {
+  background-color: white;
+}
+
+/* Add colors for each checkbox */
+.status-checkboxes label:nth-of-type(1) {
+  /* Ongoing */
+  color: green;
+  border-color: green;
+}
+
+.status-checkboxes label:nth-of-type(2) {
+  /* Upcoming */
+  color: orange;
+  border-color: orange;
+}
+
+.status-checkboxes label:nth-of-type(3) {
+  /* Finished */
+  color: red;
+  border-color: red;
+}
+
+.status-checkboxes input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid white;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Animate background change and scale effect when checked */
+.status-checkboxes input[type="checkbox"]:checked {
+  background-color: white;
+}
+
+.status-checkboxes input[type="checkbox"]:checked ~ label {
+  background-color: currentColor;
+  color: white; /* Text turns white */
+  transform: scale(1.05);
+}
 
 .status.ongoing {
-    color: green;
+  color: green;
 }
 
 .status.finished {
-    color: red;
+  color: red;
 }
 
 .status.upcoming {
-    color: orange;
+  color: orange;
 }
 
 .status.default {
-    color: black;
+  color: black;
+}
+
+.statusText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.statusText .status {
+  display: inline-block;
+  text-align: center;
+  font-size: 20px;
+}
+
+.campaignTitle {
+  font-size: 35px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0;
+  font-family: "Roboto Serif", serif;
+}
+
+.about-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #007a89;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10rem;
+  transition: background-color 0.3s ease;
+  font-family: "Roboto Serif", serif;
+}
+
+.about-button:hover {
+  background-color: #005f6b;
+}
+
+.about-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.about-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  width: 50%;
+  max-width: 500px;
+}
+
+.about-content h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+  color: #333;
+  font-family: "Roboto Serif", serif;
+  font-weight: bold;
+}
+
+.about-content p {
+  font-size: 18px;
+  color: #333;
+  font-family: "Inter", sans-serif;
+}
+
+.close-about-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-about-button:hover {
+  background: #c9302c;
+}
+
+.roboto-serif- {
+  font-family: "Roboto Serif", serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings: "wdth" 100, "GRAD" 0;
+}
+
+.inter {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
