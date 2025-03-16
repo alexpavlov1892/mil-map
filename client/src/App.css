@@ -30,6 +30,8 @@
   z-index: -1;
 }
 
+/* pop up stuff here  */
+
 .popUpContainer {
   position: relative;
   padding: 16px;
@@ -137,6 +139,8 @@
   color: #424242;
 }
 
+/* nav bar stuff starts here  */
+
 .nav {
   position: fixed;
   top: 0;
@@ -227,6 +231,22 @@
   border-radius: 4px;
   position: relative;
   cursor: pointer;
+  gap: 8px;
+}
+
+.target-audience-filters label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 15px;
+  border: 2px solid #ccc;
+  transition: all 0.3s ease-in-out;
+  white-space: nowrap;
+  gap: 8px;
 }
 
 .target-audience-filters input[type="checkbox"]:checked {
@@ -248,17 +268,13 @@
   font-family: "Roboto Serif", serif;
 }
 
-.target-audience-filters label {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  cursor: pointer;
-  font-family: "Inter", sans-serif;
-}
-
 .target-audience-filters input {
   margin-right: 8px;
   cursor: pointer;
+}
+
+.target-audience-filters label:hover {
+  background-color: rgb(84, 84, 84);
 }
 
 /* status stuff from here  */
@@ -290,10 +306,9 @@
 }
 
 .status-checkboxes label:hover {
-  background-color: white;
+  background-color: rgb(84, 84, 84);
 }
 
-/* Add colors for each checkbox */
 .status-checkboxes label:nth-of-type(1) {
   /* Ongoing */
   color: green;
@@ -322,14 +337,13 @@
   cursor: pointer;
 }
 
-/* Animate background change and scale effect when checked */
 .status-checkboxes input[type="checkbox"]:checked {
   background-color: white;
 }
 
 .status-checkboxes input[type="checkbox"]:checked ~ label {
   background-color: currentColor;
-  color: white; /* Text turns white */
+  color: white;
   transform: scale(1.05);
 }
 
@@ -383,7 +397,7 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-top: 10rem;
+  margin-top: 4rem;
   transition: background-color 0.3s ease;
   font-family: "Roboto Serif", serif;
 }
@@ -430,13 +444,18 @@
 
 .close-about-button {
   margin-top: 20px;
-  padding: 10px 20px;
+  padding: 10px 30px;
   background: #d9534f;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.close-about-button h2 {
+  font-size: 18px;
+  color: white;
 }
 
 .close-about-button:hover {

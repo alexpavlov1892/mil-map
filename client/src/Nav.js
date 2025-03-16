@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiSearch, FiMenu, FiX } from "react-icons/fi";
 import "./App.css";
 
-const Nav = ({ onSearch }) => {
+const Nav = ({ onSearch, selectedFilters, setSelectedFilters }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedFilters, setSelectedFilters] = useState([]);
-  const [isAboutOpen, setIsAboutOpen] = useState(false); // About Popup State
+  const [filters, setFilters] = useState(selectedFilters || []);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+
+  useEffect(() => {
+    setFilters(selectedFilters);
+  }, [selectedFilters]);
 
   const toggleNav = () => setIsOpen(!isOpen);
-  const toggleAbout = () => setIsAboutOpen(!isAboutOpen); // Toggle About Popup
+  const toggleAbout = () => setIsAboutOpen(!isAboutOpen);
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
@@ -20,12 +24,14 @@ const Nav = ({ onSearch }) => {
   const handleFilterChange = (e) => {
     const { value, checked } = e.target;
     let updatedFilters = checked
-      ? [...selectedFilters, value]
-      : selectedFilters.filter((filter) => filter !== value);
+      ? [...filters, value]
+      : filters.filter((filter) => filter !== value);
 
     setSelectedFilters(updatedFilters);
     onSearch(searchQuery, updatedFilters);
   };
+
+  const isChecked = (value) => filters.includes(value);
 
   return (
     <div className={`nav ${isOpen ? "open" : ""}`}>
@@ -46,71 +52,40 @@ const Nav = ({ onSearch }) => {
               onChange={handleSearchChange}
             />
           </div>
+          {/* Target audience checkboxes */}
 
           <div className="target-audience-filters">
             <h3>Target Audience</h3>
-            <div className="checkbox-grid">
-              <label>
-                <input
-                  type="checkbox"
-                  value="Children"
-                  onChange={handleFilterChange}
-                />{" "}
-                Children
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="Adults"
-                  onChange={handleFilterChange}
-                />{" "}
-                Adults
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="Seniors"
-                  onChange={handleFilterChange}
-                />{" "}
-                Seniors
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="Unspecified"
-                  onChange={handleFilterChange}
-                />{" "}
-                Unspecified
-              </label>
-            </div>
+            {["Children", "Adults", "Seniors", "Unspecified"].map(
+              (audience) => (
+                <label key={audience}>
+                  <input
+                    type="checkbox"
+                    value={audience}
+                    checked={isChecked(audience)}
+                    onChange={handleFilterChange}
+                  />{" "}
+                  {audience}
+                </label>
+              )
+            )}
           </div>
+
+          {/* Status checkboxes */}
 
           <div className="status-checkboxes">
             <h3>Status</h3>
-            <label>
-              <input
-                type="checkbox"
-                value="Ongoing"
-                onChange={handleFilterChange}
-              />{" "}
-              Ongoing
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Upcoming"
-                onChange={handleFilterChange}
-              />{" "}
-              Upcoming
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Finished"
-                onChange={handleFilterChange}
-              />{" "}
-              Finished
-            </label>
+            {["Ongoing", "Upcoming", "Finished"].map((status) => (
+              <label key={status}>
+                <input
+                  type="checkbox"
+                  value={status}
+                  checked={isChecked(status)}
+                  onChange={handleFilterChange}
+                />{" "}
+                {status}
+              </label>
+            ))}
           </div>
 
           {/* About Button */}
@@ -136,7 +111,7 @@ const Nav = ({ onSearch }) => {
               information independently.
             </p>
             <button className="close-about-button" onClick={toggleAbout}>
-              Close
+              <h2>Close</h2>
             </button>
           </div>
         </div>

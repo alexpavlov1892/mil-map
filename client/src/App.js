@@ -31,6 +31,7 @@ function App() {
   }, []);
 
   const handleSearch = (query, filters) => {
+    setSelectedFilters(filters);
     let filtered = locations;
 
     if (query) {
@@ -67,7 +68,11 @@ function App() {
   };
   return (
     <div className="container">
-      <Nav onSearch={handleSearch} />
+      <Nav
+        onSearch={handleSearch}
+        selectedFilters={selectedFilters}
+        setSelectedFilters={setSelectedFilters}
+      />
 
       <div className="map">
         <MapContainer
