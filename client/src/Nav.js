@@ -7,6 +7,7 @@ const Nav = ({ onSearch, selectedFilters, setSelectedFilters }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState(selectedFilters || []);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [isSubmitOpen, setIsSubmitOpen] = useState(false);
 
   useEffect(() => {
     setFilters(selectedFilters);
@@ -14,6 +15,7 @@ const Nav = ({ onSearch, selectedFilters, setSelectedFilters }) => {
 
   const toggleNav = () => setIsOpen(!isOpen);
   const toggleAbout = () => setIsAboutOpen(!isAboutOpen);
+  const toggleSubmit = () => setIsSubmitOpen(!isSubmitOpen);
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
@@ -52,7 +54,6 @@ const Nav = ({ onSearch, selectedFilters, setSelectedFilters }) => {
               onChange={handleSearchChange}
             />
           </div>
-          {/* Target audience checkboxes */}
 
           <div className="target-audience-filters">
             <h3>Target Audience</h3>
@@ -71,8 +72,6 @@ const Nav = ({ onSearch, selectedFilters, setSelectedFilters }) => {
             )}
           </div>
 
-          {/* Status checkboxes */}
-
           <div className="status-checkboxes">
             <h3>Status</h3>
             {["Ongoing", "Upcoming", "Finished"].map((status) => (
@@ -88,14 +87,74 @@ const Nav = ({ onSearch, selectedFilters, setSelectedFilters }) => {
             ))}
           </div>
 
-          {/* About Button */}
           <button className="about-button" onClick={toggleAbout}>
             About
+          </button>
+          <button className="submit-button" onClick={toggleSubmit}>
+            Submit Campaign
           </button>
         </div>
       )}
 
-      {/* About Popup */}
+      {isSubmitOpen && (
+        <div className="submit-overlay">
+          <div className="submit-content">
+            <h2>Submit Your Campaign</h2>
+            <form className="submit-form">
+              <h3>
+                Note: Submissions are currently not being handled this feature
+                is still under development
+              </h3>
+              <label>
+                Campaign Name:
+                <input type="text" name="campaignName" required />
+              </label>
+
+              <label>
+                Location:
+                <input type="text" name="location" required />
+              </label>
+
+              <label>
+                Duration:
+                <input type="text" name="duration" required />
+              </label>
+
+              <label>
+                Target Audience:
+                <select name="target-audience" required>
+                  <option value="Children">Children</option>
+                  <option value="Adults">Adults</option>
+                  <option value="Seniors">Seniors</option>
+                  <option value="Unspecified">Unspecified</option>
+                </select>
+              </label>
+
+              <label>
+                Status:
+                <select name="status" required>
+                  <option value="ongoing">Ongoing</option>
+                  <option value="upcoming">Upcoming</option>
+                  <option value="finished">Finished</option>
+                </select>
+              </label>
+
+              <label>
+                External link to organiser:
+                <input type="text" name="info" required />
+              </label>
+
+              <button type="submit" className="submit-form-button">
+                <h2>Submit</h2>
+              </button>
+            </form>
+            <button className="close-submit-button" onClick={toggleSubmit}>
+              <h2>Close</h2>
+            </button>
+          </div>
+        </div>
+      )}
+
       {isAboutOpen && (
         <div className="about-overlay">
           <div className="about-content">
