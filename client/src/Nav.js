@@ -117,7 +117,12 @@ const Nav = ({ onSearch, selectedFilters, setSelectedFilters }) => {
 
               <label>
                 Duration:
-                <input type="text" name="duration" required />
+                <input
+                  type="text"
+                  placeholder="Start date - End date"
+                  name="duration"
+                  required
+                />
               </label>
 
               <label>
