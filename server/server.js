@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "../client/build"))); // Change "bui
 app.get("/api", async (req, res) => {
   try {
     const result = await pool.query(
-      `SELECT id, name, organiser, funding, status, info, start_date, end_date, target_audience, ST_X(location::geometry) AS longitude, ST_Y(location::geometry) AS latitude FROM marker`
+      `SELECT id, name, organiser, funding, status, info, start_date, end_date, target_audience, country, ST_X(location::geometry) AS longitude, ST_Y(location::geometry) AS latitude FROM marker`
     );
     res.json(result.rows);
   } catch (err) {

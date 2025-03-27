@@ -39,7 +39,9 @@ function App() {
         (loc) =>
           loc.name.toLowerCase().includes(query.toLowerCase()) ||
           (loc.organiser &&
-            loc.organiser.toLowerCase().includes(query.toLowerCase()))
+            loc.organiser.toLowerCase().includes(query.toLowerCase())) ||
+          (loc.country &&
+            loc.country.toLowerCase().includes(query.toLowerCase()))
       );
     }
 
@@ -157,7 +159,7 @@ function App() {
                         className="moreInfoButton"
                         onClick={() => window.open(loc.info, "_blank")}
                       >
-                        More Info
+                        Learn More
                       </button>
                     )}
                     <button
