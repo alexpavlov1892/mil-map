@@ -17,7 +17,7 @@ const pool = new Pool({
   database: process.env.PG_DATABASE,
 });
 
-app.use(express.static(path.join(__dirname, "client", "build")));
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.get("/api", async (req, res) => {
   try {
@@ -32,7 +32,7 @@ app.get("/api", async (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
 
 app.listen(port, () => {
