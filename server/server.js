@@ -20,7 +20,7 @@ const pool = new Pool({
 // Serve static frontend files
 // app.use(express.static(path.join(__dirname, "../client/build")));
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "client", "build", "public"));
 });
 
 app.get("/api", async (req, res) => {
@@ -36,7 +36,7 @@ app.get("/api", async (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+  res.sendFile(path.join(__dirname, "../client/build", "App.js"));
 });
 
 app.listen(port, () => {
