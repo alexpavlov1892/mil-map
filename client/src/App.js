@@ -7,7 +7,7 @@ import Nav from "./Nav.js";
 import axios from "axios";
 
 const customIcon = new Icon({
-  iconUrl: "/location1.png",
+  iconUrl: "/location1.PNG",
   iconSize: [38, 38],
   iconAnchor: [19, 38],
   popupAnchor: [0, -40],
