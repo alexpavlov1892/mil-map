@@ -43,7 +43,7 @@ const Nav = ({ onSearch, selectedFilters, setSelectedFilters }) => {
 
       {isOpen && (
         <div className="nav-content">
-          <h1 className="nav-title">Map MIL</h1>
+          <h1 className="nav-title">MIL Map</h1>
           <h2>Search</h2>
           <div className="search-box">
             <FiSearch size={18} className="search-icon" />
