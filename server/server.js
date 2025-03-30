@@ -5,7 +5,7 @@ const cors = require("cors");
 const path = require("path");
 
 const app = express();
-const port = process.env.PORT || 5001; // Use Railway's assigned port
+const port = process.env.PORT || 5001;
 
 app.use(cors());
 
@@ -18,9 +18,11 @@ const pool = new Pool({
 });
 
 // Serve static frontend files
-app.use(express.static(path.join(__dirname, "../client/build"))); // Change "build" if using Vite (use "dist" instead)
+// app.use(express.static(path.join(__dirname, "../client/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
 
-// API Route
 app.get("/api", async (req, res) => {
   try {
     const result = await pool.query(
@@ -33,12 +35,10 @@ app.get("/api", async (req, res) => {
   }
 });
 
-// Serve React frontend for any unknown routes
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build", "index.html")); // Change "build" to "dist" if using Vite
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
 
-// Start server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
